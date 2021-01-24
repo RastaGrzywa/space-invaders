@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a62179b3d0145c8ab3b711815fc73de, type: 3}
+  m_Name: Level_1_Wave
+  m_EditorClassIdentifier: 
+  enemyLines:
+  - {fileID: 11400000, guid: 109b24e89b3e0e44fa9087de516207a6, type: 2}
+  - {fileID: 11400000, guid: 27ecaebce463898409ed2aaa15aa2687, type: 2}
+  - {fileID: 11400000, guid: 04718bd18e25bcd459e43b69d066cd22, type: 2}
+  - {fileID: 11400000, guid: 0217be090d6586d419066e97ac34850b, type: 2}
+  - {fileID: 11400000, guid: 103d58fb4d08f5145b9f253179c22f28, type: 2}
