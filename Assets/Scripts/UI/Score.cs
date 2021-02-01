@@ -10,7 +10,7 @@ public class Score : MonoBehaviour
     [SerializeField] private Text valueText;
     [SerializeField] private Text dateText;
 
-    public void SetupScore(int id, int value, string date)
+    public void SetupScore(int id, uint value, string date)
     {
         idText.text = id + ":";
         valueText.text = value.ToString();

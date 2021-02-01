@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DataManager
 {
-    public static void SaveScore(int score)
+    public static void SaveScore(uint score)
     {
         PlayerScore newPlayerScore = new PlayerScore();
         newPlayerScore.SetScore(score);
@@ -50,7 +50,6 @@ public class DataManager
 
     private static void SaveScoresToSystem(List<PlayerScore> scores)
     {
-        
         string scoresString = JsonConvert.SerializeObject(scores, Formatting.None);
         PlayerPrefs.SetString("Scores", scoresString);
         PlayerPrefs.Save();

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffa9ff5a17d4a5dbb2ce2b9e72b6b97, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  healthAmount: 0
-  movementSpeed: 8
-  shootRate: 0
+  healthAmount: 3
+  movementSpeed: 10
+  shootRate: 0.5
+  invulnerableTime: 5

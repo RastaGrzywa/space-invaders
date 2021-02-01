@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 711b94d49ae84d398d35aa1ed2ab92d2, type: 3}
   m_Name: NPC_3
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3497034331871821996, guid: a13bbabb288009d43a35c8ac9843cdfb, type: 3}
+  prefab: {fileID: 1756918535168964846, guid: a13bbabb288009d43a35c8ac9843cdfb, type: 3}
   health: 1
   canShoot: 1
   shootRate: 1
+  pointsOnKill: 250

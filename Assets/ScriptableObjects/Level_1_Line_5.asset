@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level_1_Line_5
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 1249856e7cc33e4489a7aa9fb90a0f79, type: 2}
-  amountOfEnemies: 10
+  amountOfEnemies: 8

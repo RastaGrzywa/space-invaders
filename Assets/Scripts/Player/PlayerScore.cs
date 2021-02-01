@@ -3,10 +3,10 @@
 [Serializable]
 public class PlayerScore
 {
-    public int score;
+    public uint score;
     public string date;
 
-    public void SetScore(int score)
+    public void SetScore(uint score)
     {
         this.score = score;
         DateTime scoreDate = DateTime.Now;

@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class UIController : MonoBehaviour
 {
@@ -11,54 +13,50 @@ public class UIController : MonoBehaviour
     [SerializeField] private UIScreen highScoresScreen;
 
     private EUIState _uiState = EUIState.None;
-    
-    void Start()
+
+    [Inject] private GameManager _gameManager;
+
+    private void Start()
     {
         ShowLoading();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            HideUI();
-            ShowMainMenu();
-        }
-    }
-
     public void ShowLoading()
     {
-        ShowUI(EUIState.Loading, loadingScreen);
+        ShowUI(EUIState.Loading, loadingScreen, null);
     }
     
     public void ShowMainMenu()
     {
-        ShowUI(EUIState.Menu, mainMenuScreen);
+        ShowUI(EUIState.Menu, mainMenuScreen, null);
     }
     
     public void ShowGame()
     {
-        ShowUI(EUIState.Game, gamePlayScreen);
+        ShowUI(EUIState.Game, gamePlayScreen, () =>
+        {
+            _gameManager.SetupPlayMode();
+        });
     }
     
     public void ShowResult()
     {
-        ShowUI(EUIState.Result, resultScreen);
+        ShowUI(EUIState.Result, resultScreen, null);
     }
 
     public void ShowHighScores()
     {
-        ShowUI(EUIState.HighScores, highScoresScreen);
+        ShowUI(EUIState.HighScores, highScoresScreen, null);
     }
 
-    private void ShowUI(EUIState newState, UIScreen screenObject)
+    private void ShowUI(EUIState newState, UIScreen screenObject, Action onScreenShowed)
     {
         if (newState == _uiState)
         {
             return;
         }
         screenObject.gameObject.SetActive(true);
-        screenObject.Show();
+        screenObject.Show(onScreenShowed);
         _uiState = newState;
     }
 
