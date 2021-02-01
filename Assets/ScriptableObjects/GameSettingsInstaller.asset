@@ -16,18 +16,13 @@ MonoBehaviour:
     playerData: {fileID: 11400000, guid: 420d5ef30e84fde4caf96c3d1d4500c1, type: 2}
     enemyWaveData: {fileID: 11400000, guid: 3f9b37b811c0a594f845d52c9d061a86, type: 2}
     playerHealthSymbol: 10084
-    speedUpWaveAmount: 0
+    speedUpWaveAmount: 0.2
     enemiesShootingRate: 1
     enemiesYMoveSpeed: 0.5
     enemiesXMoveSpeed: 4
     enemiesYChangeAmount: 0.7
-    playerShootPrefab: {fileID: 5604367595663443998, guid: d1f5b2547e629734f9838f866d3f898c,
-      type: 3}
     enemyShootPrefab: {fileID: 8054141516192437029, guid: 35400b25eb1ac3c488413497b4cc72fb,
       type: 3}
     playerShot:
       m_AssetGUID: d1f5b2547e629734f9838f866d3f898c
-      m_SubObjectName: 
-    enemyShot:
-      m_AssetGUID: 35400b25eb1ac3c488413497b4cc72fb
       m_SubObjectName: 

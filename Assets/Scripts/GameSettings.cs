@@ -18,9 +18,7 @@ public class GameSettings
     public float enemiesXMoveSpeed;
     public float enemiesYChangeAmount;
 
-    public GameObject playerShootPrefab;
     public GameObject enemyShootPrefab;
 
     public AssetReference playerShot;
-    public AssetReference enemyShot;
 }

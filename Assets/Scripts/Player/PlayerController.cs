@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     
     [Inject] private GameSettings _gameSettings;
     [Inject] private GameManager _gameManager;
-    
+    [Inject] private ProjectileSpawner _projectileSpawner;
     private float _minX;
     private float _maxX;
     private float _projectileTimer;
@@ -65,7 +65,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
         if (other.gameObject.tag == "EnemyShot")
         {
             Destroy(other.gameObject);
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
         _isInvulnerable = true;
     }
     
-
     private void MovePlayer(Vector3 direction)
     {
         Vector3 newPosition =
@@ -91,67 +89,10 @@ public class PlayerController : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, _minX, _maxX);
         transform.position = newPosition;
     }
-
-    
-    private readonly Dictionary<AssetReference, List<GameObject>> _spawnedParticleSystems = 
-        new Dictionary<AssetReference, List<GameObject>>();
-    
-    private readonly Dictionary<AssetReference, AsyncOperationHandle<GameObject>> _asyncOperationHandles = 
-        new Dictionary<AssetReference, AsyncOperationHandle<GameObject>>();
     
     private void Fire()
     {
-        // GameObject proj = Instantiate(_gameSettings.playerShootPrefab, transform.position, _gameSettings.playerShootPrefab.transform.rotation);
-        // proj.GetComponent<Rigidbody>().AddForce(proj.transform.rotation * Vector3.back * 10f, ForceMode.Impulse);
-
-
-        if (!_gameSettings.playerShot.RuntimeKeyIsValid())
-        {
-            Debug.LogError("No asset for: " + _gameSettings.playerShot.RuntimeKey);
-            return;
-        }
-        
-        
-        LoadAndSpawn(_gameSettings.playerShot, transform.position, _gameSettings.playerShootPrefab.transform.rotation);
-    }
-    
-    private void LoadAndSpawn(AssetReference assetReference, Vector3 objectPosition, Quaternion rotation)
-    {
-        var op = Addressables.LoadAssetAsync<GameObject>(assetReference);
-        _asyncOperationHandles[assetReference] = op;
-        op.Completed += (operation) =>
-        {
-            SpawnParticleFromLoadedReference(assetReference, objectPosition, rotation);
-        };
-    }
-
-    private void SpawnParticleFromLoadedReference(AssetReference assetReference, Vector3 position, Quaternion rotation)
-    {
-        assetReference.InstantiateAsync(position, rotation).Completed += (asyncOperationHandle) =>
-        {
-            if (_spawnedParticleSystems.ContainsKey(assetReference) == false)
-            {
-                _spawnedParticleSystems[assetReference] = new List<GameObject>();
-            }
-            
-            _spawnedParticleSystems[assetReference].Add(asyncOperationHandle.Result);
-            var notify = asyncOperationHandle.Result.GetComponent<BaseProjectile>();
-            notify.Destroyed += Remove;
-            notify.AssetReference = assetReference;
-            
-            asyncOperationHandle.Result.GetComponent<Rigidbody>().AddForce(rotation * Vector3.back * 10f, ForceMode.Impulse);
-        };
-    }
-    
-    private void Remove(AssetReference assetReference, BaseProjectile obj)
-    {
-        Addressables.ReleaseInstance(obj.gameObject);
-        
-        _spawnedParticleSystems[assetReference].Remove(obj.gameObject);
-        if (_spawnedParticleSystems[assetReference].Count == 0)
-        {
-            _asyncOperationHandles.Remove(assetReference);
-        }
+        _projectileSpawner.LoadAndSpawn(_gameSettings.playerShot, transform.position);
     }
     
     public void ResetPosition()
